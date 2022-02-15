@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataStructures.UnorderedList;
+using DataStructures.OrderedList;
 
 namespace DataStructures
 {
@@ -19,6 +20,7 @@ namespace DataStructures
             {
                 Console.WriteLine("Enter your choice");
                 Console.WriteLine("1: Unordered List");
+                Console.WriteLine("2: Ordered List");
                 Console.WriteLine("0: Exit");
                 int choice = Convert.ToInt32(Console.ReadLine());
                 switch (choice)
@@ -45,6 +47,27 @@ namespace DataStructures
                         Console.WriteLine("List of words after modification");
                         Console.WriteLine(modifiedText);
                         break;
+                    case 2:                  
+                        OrderedList<string> ordered = new OrderedList<string>();
+                        string filePath1 = @"E:\RfaBatch\DataStructures\DataStructures\OrderedList\OrderedData.txt";
+                        string text1 = File.ReadAllText(filePath1);
+                        string[] textArray1 = text1.Split();
+                        for (int i = 0; i < textArray1.Length; i++)
+                        {
+                            ordered.Add(textArray1[i]);
+                        }
+                        Console.WriteLine("Enter the number to be searched");
+                        string num = Console.ReadLine();
+                        bool rs = ordered.Search(num);
+                        if (rs == true)
+                            ordered.Pop(num);
+                        else
+                            ordered.Add(num);
+                        string newList = ordered.Display();
+                        File.WriteAllText(filePath1, newList);
+                        Console.WriteLine("List of numbers after modification");
+                        Console.WriteLine(newList);
+                        break;                    
                     case 0:
                         CONTINUE = false;
                         break;
